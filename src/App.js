@@ -65,6 +65,10 @@ class App extends Component {
             )}
           />
           <Route
+            path="/books/:bookCOLOR"
+            render={props => <BookList {...props} books={this.state.books} />}
+          />
+          <Route
             path="/books/"
             render={props => <BookList {...props} books={this.state.books} />}
           />

@@ -16,15 +16,23 @@ class BooksList extends Component {
     );
     this.setState({ filteredBooks: filteredBooks });
   };
+
   render() {
+    let books = [];
+    if (this.props.match.params.bookCOLOR) {
+      const bookCOLOR = this.props.match.params.bookCOLOR.toLowerCase();
+      let coloredBooks = this.state.filteredBooks.filter(
+        book => book.color === bookCOLOR
+      );
+      books = <BookTable books={coloredBooks} />;
+    } else {
+      books = <BookTable books={this.state.filteredBooks} />;
+    }
     return (
       <div>
         <h3>Books</h3>
         <SearchBar onChange={this.filterbooks} />
-        <div className="row">
-          {" "}
-          <BookTable books={this.state.filteredBooks} />
-        </div>
+        <div className="row">{books}</div>
       </div>
     );
   }
